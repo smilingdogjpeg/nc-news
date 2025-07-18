@@ -12,23 +12,42 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
       return db.query(`DROP TABLE IF EXISTS topics;`)
     })
     .then(() => {
-      return db.query(` CREATE TABLE topics (
-  slug VARCHAR PRIMARY KEY,
-  description VARCHAR NOT NULL,
-  img_url VARCHAR(1000) NOT NULL
-);`
-      )
+      return createTopics()
     })
     .then(() => {
-      return db.query(` CREATE TABLE users (
-    username VARCHAR PRIMARY KEY,
-    name VARCHAR,
-    avatar_url VARCHAR(1000)
-    );`
-      )
+      return createUsers()
     })
     .then(() => {
-      return db.query(` CREATE TABLE articles (
+      return createArticles()
+    })
+    .then(() => {
+      return createComments()
+    })
+    .catch((err) => {
+      console.error("Error during seeding:", err);
+    });
+}
+
+function createTopics() {
+  const query = `CREATE TABLE topics (
+          slug VARCHAR PRIMARY KEY,
+          description VARCHAR NOT NULL,
+          img_url VARCHAR(1000) NOT NULL
+          )`
+  return db.query(query);
+}
+
+function createUsers() {
+  const query = `CREATE TABLE users (
+          username VARCHAR PRIMARY KEY,
+          name VARCHAR,
+          avatar_url VARCHAR(1000)
+           )`
+  return db.query(query);
+}
+
+function createArticles() {
+  const query = `CREATE TABLE articles (
         article_id SERIAL PRIMARY KEY,
         title VARCHAR,
         topic VARCHAR REFERENCES topics(slug),
@@ -37,20 +56,20 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         votes INT DEFAULT 0,
         article_img_url VARCHAR (1000)
-      );`)
-    })
-    .then(() => {
-      return db.query(` CREATE TABLE comments (
+      )`
+  return db.query(query);
+}
+
+function createComments() {
+  const query = ` CREATE TABLE comments (
         comment_id SERIAl PRIMARY KEY,
         article_id INT REFERENCES articles(article_id),
         body TEXT,
         votes INT DEFAULT 0,
         author VARCHAR REFERENCES users(username),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )`)
-    })
-
-
+        )`
+  return db.query(query);
 }
 
 
