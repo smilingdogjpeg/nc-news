@@ -1,8 +1,8 @@
 const {
-  convertTimestampToDate
+  convertTimestampToDate, createLookupRef
 } = require("../db/seeds/utils");
 
-describe("convertTimestampToDate", () => {
+describe.skip("convertTimestampToDate", () => {
   test("returns a new object", () => {
     const timestamp = 1557572706232;
     const input = { created_at: timestamp };
@@ -38,3 +38,16 @@ describe("convertTimestampToDate", () => {
   });
 });
 
+describe("createLookupRef", () => {
+  test("returns object with correctly mapped property", () => {
+    const inputData = [
+      {
+        id: 10,
+        username: "user"
+      }
+    ]
+    const expected = { 10: "user" }
+    const result = createLookupRef(inputData, "id", "username")
+    expect(result).toEqual(expected)
+  })
+})

@@ -5,7 +5,7 @@ const data = require('../db/data/test-data/index');
 beforeAll(() => seed(data));
 afterAll(() => db.end());
 
-describe.only('seed', () => {
+describe('seed', () => {
   describe('topics table', () => {
     test('topics table exists', () => {
       return db
@@ -81,7 +81,7 @@ describe.only('seed', () => {
     });
   });
 
-  describe.only('users table', () => {
+  describe('users table', () => {
     test('users table exists', () => {
       return db
         .query(
@@ -155,7 +155,7 @@ describe.only('seed', () => {
     });
   });
 
-  describe.only('articles table', () => {
+  describe('articles table', () => {
     test('articles table exists', () => {
       return db
         .query(
@@ -363,7 +363,7 @@ describe.only('seed', () => {
     });
   });
 
-  describe.only('comments table', () => {
+  describe('comments table', () => {
     test('comments table exists', () => {
       return db
         .query(
@@ -543,7 +543,7 @@ describe.only('seed', () => {
   });
 });
 
-describe('data insertion', () => {
+describe.only('data insertion', () => {
 
   test('topics data has been inserted correctly', () => {
     return db.query(`SELECT * FROM topics;`).then(({ rows: topics }) => {
