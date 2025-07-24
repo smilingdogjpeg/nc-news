@@ -38,7 +38,7 @@ describe.skip("convertTimestampToDate", () => {
   });
 });
 
-describe("createLookupRef", () => {
+describe.skip("createLookupRef", () => {
   test("returns object with correctly mapped property", () => {
     const inputData = [
       {

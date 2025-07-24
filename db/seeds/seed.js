@@ -70,12 +70,13 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         ` INSERT INTO comments(
           article_id, body, votes, author, created_at) VALUES %L RETURNING *`,
         commentData.map(({ body, votes, author, created_at, article_title }) => [
-          ref[article_title.toLowerCase().trim()],
+          ref[article_title],
           body,
           votes,
           author,
           new Date(created_at)
         ])
+        
       )
       return db.query(commentsInsertQuery)
     })
