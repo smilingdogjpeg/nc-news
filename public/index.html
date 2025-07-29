@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC News API</title>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the NC News API information superhighway(alleyway)!</h1>
+        <marquee behavior="scroll" direction="left" scrollamount="20">
+            Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        </marquee>
+
+
+        <h2>The NC News Database - A RESTful API for a news articles database.<br />
+            What's it all about? Allow me to explain...</h2>
+    </header>
+    <main>
+        <section>
+            <span title="No cat mascot here, sorry"><img src="./pics/Math_Lady_meme.jpg"
+                    alt="classic meme of confused looking lady from a tv show overlayed with mathematic symbols" /></span>
+        </section>
+        <section>
+
+            <h3>What's inside?!<br />
+                The data itself can be broken down into the following categories:</h3>
+            <ul>
+                <li>Topics</li>
+                <li>Articles</li>
+                <li>Users</li>
+                <li>Comments</li>
+            </ul>
+        </section>
+        <section>
+            <h3>What can it do?!<br />
+                Methods of Database Interaction</h3>
+            <p>Currently, information within the database can be accessed, added to, modified, and deleted.<br />
+                This is done using HTTP methods, which allow you to send and retrieve data to and from the server.<br />
+                Let's take a look at these different methods...</p>
+            <ol>
+                <li><b>GET /api/topics </b><br />
+                    <b>Description:</b><br />
+                    Retrieves a list of all topics available.<br />
+                    <b>Response:</b> <br />
+                    An array of topic objects.<br />
+                    <b>Example:</b> {<br />
+                    "slug": "football",<br />
+                    "description": "Footie!"<br />
+                    }
+                </li>
+                <br>
+                <li><b>GET /api/articles</b> <br />
+                    <b>Description:</b><br />
+                    Fetches a list of all articles available.<br />
+                    <b>Response:</b> <br />
+                    Array of article objects.<br />
+                    <b>Example:</b> {<br />
+                    "title": "Seafood substitutions are increasing",<br />
+                    "topic": "cooking",<br />
+                    "author": "weegembump",<br />
+                    "created_at": "2018-05-30T15:59:13.341Z",<br />
+                    "votes": 0,<br />
+                    "comment_count": 6<br />
+                    }
+                </li>
+                <br>
+                <li><b>GET /api/users</b><br />
+                    <b>Description:</b><br />
+                    Retrieves all users in the database.<br />
+                    <b>Response:</b><br />
+                    Array of user objects.<br />
+                    <b>Example:</b> {<br />
+                    "username": "butter_bridge",<br />
+                    "name": "jonny",<br />
+                    "avatar_url": ""<br />
+                    }
+                </li>
+                <br>
+                <li><b>GET /api/articles/:article_id</b><br />
+                    <b>Description:</b><br />
+                    Returns a specific article by its article_id.<br />
+                    <b>Response:</b> <br />
+                    An article object.<br />
+                    <b>Example:</b> {<br />
+                    "title": "Living in the shadow of a great man",<br />
+                    "topic": "mitch",<br />
+                    "author": "butter_bridge",<br />
+                    "body": "I find this existence challenging",<br />
+                    "created_at": "2020-07-09T20:11:00.000Z",<br />
+                    "votes": 100,<br />
+                    "article_img_url": ""<br />
+                    }
+                </li>
+                <br>
+                <li><b>GET /api/articles/:article_id/comments</b><br />
+                    <b>Description:</b><br />
+                    Fetches all comments for the specified article ID.<br />
+                    <b>Response:</b> <br />
+                    Array of comment objects.<br />
+                    <b>Example:</b>{<br />
+                    "comment_id": 89,<br />
+                    "article_id": 1,<br />
+                    "body": "Esse et expedita harum non. Voluptatibus commodi voluptatem. <br />
+                    Minima velit suscipit numquam ea. <br />
+                    Id vitae debitis aut incidunt odio quo quam possimus ipsum.",<br />
+                    "votes": 2,<br />
+                    "author": "cooljmessy",<br />
+                    "created_at": "2020-10-24T06:08:00.000Z"<br />
+                    }
+                </li>
+                <br>
+                <li><b>POST /api/articles/:article_id/comments</b><br />
+                    <b></b>Description:<br />
+                    Adds a new comment to the specified article.<br />
+                    <b>Request body:</b>{<br />
+                    "username": "example_user",<br />
+                    "body": "This is a comment."<br />
+                    }<br />
+                    <b>Response:</b> <br />
+                    The newly created comment object.<br />
+                    <b>Example:</b> {<br />
+                    "username": "example_user",<br />
+                    "body": "This is a comment."<br />
+                    }
+                </li>
+                <br>
+                <li><b>PATCH /api/articles/:article_id</b><br />
+                    <b>Description:</b><br />
+                    Updates the vote count for a specific article (incrementing or decrementing).<br />
+                    <b>Request body:</b> {<br />
+                    "inc_votes": 1<br />
+                    }<br />
+                    <b>Response:</b><br />
+                    The updated article object with new vote count.<br />
+                    <b>Example:</b> {<br />
+                    "title": "Living in the shadow of a great man",<br />
+                    "topic": "mitch",<br />
+                    "author": "butter_bridge",<br />
+                    "body": "I find this existence challenging",<br />
+                    "created_at": "2020-07-09T20:11:00.000Z",<br />
+                    "votes": 105,<br />
+                    "article_img_url": ""<br />
+                    }
+            </ol>
+            </ul>
+        </section>
+        <section>
+            <style>
+                table,
+                th,
+                td {
+                    border: 1px solid black;
+                }
+            </style>
+
+            <body>
+                <h3>What could go wrong?!<br />
+                    Errors and what they mean.</h3>
+                <table>
+                    <tr>
+                        <th>Status</th>
+                        <th>Reason</th>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request (e.g., invalid ID format)</td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>Path Not Found (e.g., ID does not exist)</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Server Error (you cannot helped, good luck)</td>
+                    </tr>
+                </table>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
