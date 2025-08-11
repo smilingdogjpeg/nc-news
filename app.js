@@ -5,8 +5,10 @@ const getTopics = require(`./controllers/topics.controllers`)
 const { getArticles, getArticleByID, updateVotesByArticleID } = require(`./controllers/articles.controllers`)
 const getUsers = require(`./controllers/users.controllers`)
 const { getCommentsByArticleID, addCommentToArticle } = require(`./controllers/comments.controllers`)
+const cors = require(`cors`)
 
-app.use("/api", express.static("public"));
+app.use(cors())
+app.use("/api", express.static("public"))
 app.use(express.json())
 
 app.get(`/api/topics`, getTopics)
