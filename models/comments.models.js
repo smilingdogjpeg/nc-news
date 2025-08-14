@@ -22,14 +22,16 @@ const newComment = (article_id, username, body) => {
 }
 
 const removeComment = (comment_id) => {
-    return db.query(`DELETE`,
+    return db.query(`DELETE 
+                    FROM comments
+                    WHERE comment_id = $1
+                    RETURNING *`,
         [comment_id])
         .then(({ rows }) => {
-            
-            return comment
+            return rows[0] || null
         })
 }
 
 
 
-module.exports = { fetchCommentsByArticleID, newComment }
+module.exports = { fetchCommentsByArticleID, newComment, removeComment }

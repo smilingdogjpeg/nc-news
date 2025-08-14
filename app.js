@@ -2,9 +2,9 @@ const db = require('./db/connection')
 const express = require("express");
 const app = express();
 const getTopics = require(`./controllers/topics.controllers`)
-const { getArticles, getArticleByID, updateVotesByArticleID } = require(`./controllers/articles.controllers`)
+const { getArticles, getArticleByID, updateVotesByArticleID, updateVotesByCommentID } = require(`./controllers/articles.controllers`)
 const getUsers = require(`./controllers/users.controllers`)
-const { getCommentsByArticleID, addCommentToArticle } = require(`./controllers/comments.controllers`)
+const { getCommentsByArticleID, addCommentToArticle, deleteComment } = require(`./controllers/comments.controllers`)
 const cors = require(`cors`)
 
 app.use(cors())
@@ -21,8 +21,9 @@ app.get(`/api/articles/:article_id/comments`, getCommentsByArticleID)
 app.post(`/api/articles/:article_id/comments`, addCommentToArticle)
 
 app.patch(`/api/articles/:article_id`, updateVotesByArticleID)
+app.patch(`/api/comments/:comment_id`, updateVotesByCommentID)
 
-//app.delete(`/api/comments/:comment_id`, deleteComment)
+app.delete(`/api/comments/:comment_id`, deleteComment)
 
 
 app.use((req, res, next) => {

@@ -24,7 +24,7 @@ const fetchArticleByID = (article_id) => {
         })
 }
 
-const updateVoteCount = (article_id, inc_vote) => {
+const updateArticleVoteCount = (article_id, inc_vote) => {
     return db.query(`UPDATE articles SET votes = votes + $2
                     WHERE article_id = $1
                     RETURNING *`,[article_id, inc_vote])
@@ -34,5 +34,14 @@ const updateVoteCount = (article_id, inc_vote) => {
                     })
 }
 
+const updateCommentVoteCount = (comment_id, inc_vote) => {
+    return db.query(`UPDATE comments SET votes = votes + $2 
+                    WHERE comment_id = $1 
+                    RETURNING *`, [comment_id, inc_vote])
+                    .then(({rows}) => {
+                        const comment = rows[0]
+                        return comment
+                    })
+}
 
-module.exports = { fetchArticles, fetchArticleByID, updateVoteCount }
+module.exports = { fetchArticles, fetchArticleByID, updateArticleVoteCount, updateCommentVoteCount }

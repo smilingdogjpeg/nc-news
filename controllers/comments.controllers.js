@@ -1,4 +1,4 @@
-const { fetchCommentsByArticleID, newComment } = require(`../models/comments.models`)
+const { fetchCommentsByArticleID, newComment, removeComment } = require(`../models/comments.models`)
 
 const getCommentsByArticleID = (req, res, next) => {
     const { article_id } = req.params
@@ -18,10 +18,16 @@ const addCommentToArticle = (req, res, next) => {
         .catch(next)
 }
 
-const deleteComment = (re, res, next) => {
+const deleteComment = (req, res, next) => {
     const { comment_id } = req.params
-    return deleteComment(comment_id)
-    .then
+    removeComment(comment_id)
+        .then((deletedComment) => {
+            if (!deletedCOmment) {
+                return res.status(404).send({ msg: "Comment not found" });
+            }
+            res.status(204).send()
+        })
+        .catch(next)
 }
 
-module.exports = { getCommentsByArticleID, addCommentToArticle }
+module.exports = { getCommentsByArticleID, addCommentToArticle, deleteComment }
