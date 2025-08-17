@@ -10,11 +10,11 @@ const fetchCommentsByArticleID = (article_id) => {
 
 }
 
-const newComment = (article_id, username, body) => {
+const newComment = (article_id, author, body) => {
     return db.query(`INSERT INTO comments (article_id, author, body)
                     VALUES ($1, $2, $3)
                     RETURNING *`,
-        [article_id, username, body])
+        [article_id, author, body])
         .then(({ rows }) => {
             const comment = rows[0]
             return comment

@@ -10,8 +10,8 @@ const getCommentsByArticleID = (req, res, next) => {
 
 const addCommentToArticle = (req, res, next) => {
     const { article_id } = req.params
-    const { username, body } = req.body
-    return newComment(article_id, username, body)
+    const { author, body } = req.body
+    return newComment(article_id, author, body)
         .then((newComment) => {
             res.status(201).send({ newComment })
         })

@@ -17,7 +17,6 @@ app.get(`/api/users`, getUsers)
 app.get(`/api/articles/:article_id`, getArticleByID)
 app.get(`/api/articles/:article_id/comments`, getCommentsByArticleID)
 
-
 app.post(`/api/articles/:article_id/comments`, addCommentToArticle)
 
 app.patch(`/api/articles/:article_id`, updateVotesByArticleID)
