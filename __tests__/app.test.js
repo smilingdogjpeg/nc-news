@@ -168,7 +168,7 @@ describe("GET /api/articles/:article_id/comments", () => {
 describe("POST /api/articles/:article_id/comments", () => {
   test("201: Responds with the comment added to article for input ID", () => {
     const testComment = {
-      username: "butter_bridge",
+      author: "butter_bridge",
       body: "I am adding a comment"
     }
     return request(app)

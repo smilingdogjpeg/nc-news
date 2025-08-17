@@ -9,14 +9,24 @@ const getCommentsByArticleID = (req, res, next) => {
 }
 
 const addCommentToArticle = (req, res, next) => {
-    const { article_id } = req.params
-    const { author, body } = req.body
-    return newComment(article_id, author, body)
-        .then((newComment) => {
-            res.status(201).send({ newComment })
-        })
-        .catch(next)
-}
+  const { article_id } = req.params;
+  const { author, body } = req.body;
+
+  if (!author || !body) {
+    return res.status(400).send({ msg: "Author and body are required" });
+  }
+
+  return newComment(article_id, author, body)
+    .then((newComment) => {
+      res.status(201).send({ newComment });
+    })
+    .catch((err) => {
+      if (err.code === "23503") {
+        return res.status(400).send({ msg: "Author must be a registered user" });
+      }
+      next(err);
+    });
+};
 
 const deleteComment = (req, res, next) => {
     const { comment_id } = req.params
