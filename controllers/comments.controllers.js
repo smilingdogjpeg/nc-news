@@ -12,9 +12,6 @@ const addCommentToArticle = (req, res, next) => {
   const { article_id } = req.params;
   const { author, body } = req.body;
 
-  if (!author || !body) {
-    return res.status(400).send({ msg: "Author and body are required" });
-  }
 
   return newComment(article_id, author, body)
     .then((newComment) => {
@@ -32,7 +29,7 @@ const deleteComment = (req, res, next) => {
     const { comment_id } = req.params
     removeComment(comment_id)
         .then((deletedComment) => {
-            if (!deletedCOmment) {
+            if (!deletedComment) {
                 return res.status(404).send({ msg: "Comment not found" });
             }
             res.status(204).send()
