@@ -119,7 +119,7 @@ function createArticles() {
 
 function createComments() {
   const query = ` CREATE TABLE comments (
-        comment_id SERIAl PRIMARY KEY,
+        comment_id SERIAL PRIMARY KEY,
         article_id INT REFERENCES articles(article_id),
         body TEXT,
         votes INT DEFAULT 0,

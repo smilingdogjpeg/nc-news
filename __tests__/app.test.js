@@ -42,11 +42,26 @@ describe.only("GET /api/topics", () => {
         })
       });
   });
-  test("200: Responds with an object sorted by specified column", () => {
+  test("200: Responds with articles sorted by specified column (votes ASC)", () => {
     return request(app)
-    .get('api/topics')
-  })
+      .get("/api/articles?sort_by=votes&order=ASC")
+      .expect(200)
+      .then(({ body }) => {
+        const { articles } = body;
+        expect(articles).toBeInstanceOf(Array);
+        expect(articles).toBeSortedBy("votes", { ascending: true });
+      });
+  });
+test("200: Responds with articles sorted by default (created_at DESC)", () => {
+  return request(app)
+    .get("/api/articles")
+    .expect(200)
+    .then(({ body }) => {
+      const { articles } = body;
+      expect(articles).toBeSortedBy("created_at", { descending: true });
+    });
 });
+})
 
 describe("GET /api/articles", () => {
   test("200: Responds with an object with the key of articles and the value of an array of article objects", () => {
