@@ -24,7 +24,8 @@ describe.skip("GET /api", () => {
       });
   });
 });
-describe("GET /api/topics", () => {
+
+describe.only("GET /api/topics", () => {
   test("200: Responds with an object with a key of topics and the value of an array of topic objects", () => {
     return request(app)
       .get('/api/topics')
@@ -41,7 +42,12 @@ describe("GET /api/topics", () => {
         })
       });
   });
+  test("200: Responds with an object sorted by specified column", () => {
+    return request(app)
+    .get('api/topics')
+  })
 });
+
 describe("GET /api/articles", () => {
   test("200: Responds with an object with the key of articles and the value of an array of article objects", () => {
     return request(app)
@@ -239,6 +245,7 @@ describe("POST /api/articles/:article_id/comments", () => {
       })
   })
 })
+
 describe("PATCH /api/articles/:article_id", () => {
   test("200: Responds with article with updated vote count for given article ID", () => {
     const testVoteUpdate = {
@@ -259,6 +266,14 @@ describe("PATCH /api/articles/:article_id", () => {
           article_img_url: expect.any(String)
         })
       })
+  })
+})
+
+describe("DELETE /api/comments/:comment_id", () => {
+  test("204: responds with no content", () => {
+    return request(app)
+      .delete("/api/comments/2")
+      .expect(204)
   })
 })
 
